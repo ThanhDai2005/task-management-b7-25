@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const controller = require("../../v1/controllers/task.controller");
+const controller = require("../controllers/task.controller");
 
 router.get("/", controller.index);
 
