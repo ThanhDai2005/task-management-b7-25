@@ -21,10 +21,15 @@ module.exports.register = async (req, res) => {
       message: "Email đã tồn tại!",
     });
   } else {
-    const user = new User(req.body);
-    const data = await user.save();
+    const user = new User({
+      fullName: req.body.fullName,
+      email: req.body.email,
+      password: req.body.password,
+      token: generateHelper.generateRandomString(30),
+    });
+    await user.save();
 
-    const token = data.token;
+    const token = user.token;
     res.cookie("token", token);
 
     res.json({
